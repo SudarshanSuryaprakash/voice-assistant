@@ -1,0 +1,49 @@
+# Jupiter Voice Configuration
+# https://github.com/jupiter/jupiter-voice
+
+wake:
+  # Path to wake word model. Use "hey_jarvis" for the built-in model,
+  # or a path like "assets/hey_jupiter.onnx" for a custom trained model.
+  model: "hey_jarvis"
+  threshold: 0.5
+  inference_framework: "onnx"
+
+stt:
+  model: "distil-medium.en"
+  batch_size: 12
+  chunk_duration: 3.0
+  chunk_overlap: 0.5
+
+tts:
+  voice: "af_heart"
+  speed: 1.0
+  lang: "en-us"
+  fallback_to_macos_say: true
+
+close_phrase:
+  primary: "sudo out"
+  alternatives:
+    - "pseudo out"
+    - "sue do out"
+    - "sudo doubt"
+    - "su do out"
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  chunk_size: 1280
+  device: null  # null = default device
+
+gateway:
+  session_id: "agent:main:main"
+  timeout: 120
+  # openclaw_bin: null  # auto-detect from PATH
+
+cues:
+  enabled: true
+  wake_detected: "assets/ding.wav"
+  sending: "assets/send.wav"
+  error: "assets/error.wav"
+
+logging:
+  level: "INFO"

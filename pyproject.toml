@@ -1,0 +1,64 @@
+[project]
+name = "jupiter-voice"
+version = "0.1.0"
+description = "A fully local, free voice assistant powered by OpenClaw AI"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Jupiter" },
+]
+keywords = ["voice-assistant", "speech-to-text", "text-to-speech", "openclaw", "local-ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "lightning-whisper-mlx>=0.0.10",
+    "kokoro-onnx>=0.5.0",
+    "openwakeword>=0.6.0",
+    "sounddevice>=0.5.0",
+    "soundfile>=0.12.0",
+    "numpy>=2.0.2",
+    "pyyaml>=6.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+jupiter-voice = "jupiter_voice.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jupiter/jupiter-voice"
+Repository = "https://github.com/jupiter/jupiter-voice"
+Issues = "https://github.com/jupiter/jupiter-voice/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
