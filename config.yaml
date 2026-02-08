@@ -1,5 +1,4 @@
 # Jupiter Voice Configuration
-# https://github.com/jupiter/jupiter-voice
 
 wake:
   # Path to wake word model. Use "hey_jarvis" for the built-in model,

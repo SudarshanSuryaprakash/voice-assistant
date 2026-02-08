@@ -45,9 +45,9 @@ dev = [
 jupiter-voice = "jupiter_voice.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/jupiter/jupiter-voice"
-Repository = "https://github.com/jupiter/jupiter-voice"
-Issues = "https://github.com/jupiter/jupiter-voice/issues"
+Homepage = "https://github.com/SudarshanSuryaprakash/voice-assistant"
+Repository = "https://github.com/SudarshanSuryaprakash/voice-assistant"
+Issues = "https://github.com/SudarshanSuryaprakash/voice-assistant/issues"
 
 [build-system]
 requires = ["hatchling"]

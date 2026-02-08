@@ -27,6 +27,7 @@ Thumbs.db
 # Models (large files, downloaded by setup.sh)
 models/*.onnx
 models/*.bin
+mlx_models/
 
 # Logs
 *.log
