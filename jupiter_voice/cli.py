@@ -160,7 +160,8 @@ class JupiterVoice:
             self._transcript_parts.clear()
             self.capture.drain()  # Discard buffered audio from before wake
             self.sm.transition(Event.WAKE_WORD_DETECTED)
-            self.console.print('[dim]Listening... say "sudo out" when done.[/dim]')
+            close = self.config.close_phrase.primary
+            self.console.print(f'[dim]Listening... say "{close}" when done.[/dim]')
 
     def _listening_tick(self) -> None:
         """Record and transcribe a chunk, checking for close phrase."""
@@ -169,6 +170,11 @@ class JupiterVoice:
 
         # Convert to float32 for Whisper
         audio_float = audio.astype(np.float32) / 32768.0
+
+        # Skip silent/near-silent chunks (energy gate)
+        rms = np.sqrt(np.mean(audio_float ** 2))
+        if rms < 0.008:  # Silence threshold — tune if needed
+            return
 
         # Transcribe
         text = self.stt.transcribe(audio_float)
@@ -248,7 +254,7 @@ class JupiterVoice:
             f"[bold cyan]Jupiter Voice[/bold cyan] v{__version__}\n"
             "[dim]Local voice assistant powered by OpenClaw[/dim]\n\n"
             f'Say [bold]"{wake_name}"[/bold] to start listening\n'
-            'Say [bold]"sudo out"[/bold] to send your query',
+            f'Say [bold]"{self.config.close_phrase.primary}"[/bold] to send your query',
             title="[bold]Jupiter Voice[/bold]",
             border_style="cyan",
             padding=(1, 2),
