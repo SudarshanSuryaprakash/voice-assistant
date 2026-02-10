@@ -29,7 +29,12 @@ class ClosePhraseDetector:
         alternatives: Optional[list[str]] = None,
     ) -> None:
         self.primary = primary
-        self.patterns = list(DEFAULT_PATTERNS)
+        # Start with default patterns only if primary is "sudo out"
+        if primary.lower().strip() in ("sudo out", "sudo  out"):
+            self.patterns = list(DEFAULT_PATTERNS)
+        else:
+            # Custom primary — add it as a pattern, skip sudo defaults
+            self.patterns = [re.escape(primary).replace(r"\ ", r"\s+")]
 
         if alternatives:
             for alt in alternatives:
